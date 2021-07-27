@@ -1,0 +1,24 @@
+{
+  "name": "udemy-farm",
+  "version": "1.0.0",
+  "description": "Example of a store web app with NodeJS and MongoDB, using Express and Mongoose.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adrisanchu/udemy-farm.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adrisanchu/udemy-farm/issues"
+  },
+  "homepage": "https://github.com/adrisanchu/udemy-farm#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
