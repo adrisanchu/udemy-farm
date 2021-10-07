@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Product = require('./product');
 const { Schema } = mongoose;
 
 const farmSchema = new Schema({
@@ -19,6 +20,15 @@ const farmSchema = new Schema({
             ref: 'Product'
         }
     ]
+});
+
+// set deletion strategy with a middleware
+farmSchema.post('findOneAndDelete', async function(farm) {
+    if (farm.products.length) {
+        // delete all products when deleting a farm
+        const res = await Product.deleteMany({ _id: { $in: farm.products } });
+        // console.log(res);
+    }
 });
 
 const Farm = mongoose.model('Farm', farmSchema);

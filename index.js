@@ -75,6 +75,12 @@ app.get('/farms/:id', async (req, res) => {
   res.render('farms/show', { farm });
 });
 
+app.delete('/farms/:id', async (req, res) => {
+  const deletedFarm = await Farm.findByIdAndDelete(req.params.id);
+  // the products associated to the farm are deleted with a middleware
+  res.redirect('/farms');
+});
+
 // PRODUCTS
 app.get('/products', async (req, res) => {
   const { category } = req.query;
