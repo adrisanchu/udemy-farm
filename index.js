@@ -4,6 +4,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const Product = require('./models/product');
+const Farm = require('./models/farm');
 
 const categories = ['fruit', 'vegetable', 'dairy'];
 
@@ -30,6 +31,30 @@ app.get('/', (req, res) => {
   res.send('Welcome!');
 });
 
+// FARMS
+app.get('/farms', async (req, res) => {
+  const farms = await Farm.find({});
+  res.render('farms/index', { farms });
+});
+
+app.get('/farms/new', (req, res) => {
+  res.render('farms/new');
+});
+
+app.post('/farms', async (req, res) => {
+  const farm = new Farm(req.body);
+  await farm.save();
+  // res.redirect('/farms');
+  res.redirect(`/farms/${farm._id}`);
+});
+
+app.get('/farms/:id', async (req, res) => {
+  const { id } = req.params;
+  const farm = await Farm.findById(id);
+  res.render('farms/show', { farm });
+});
+
+// PRODUCTS
 app.get('/products', async (req, res) => {
   const products = await Product.find({});
   res.render('products/index', { products });
